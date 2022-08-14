@@ -1,4 +1,4 @@
-# @astrojs/tailwind 💨
+# astro-single-file
 
 This **[Astro integration][astro-integration]** allows developers to bundle the CSS and HTML in a single file.
 
@@ -20,11 +20,11 @@ The `astro add` command-line tool automates the installation for you. Run one of
   
 ```sh
 # Using NPM
-npx astro add astro-single-file
+npx astro add -D astro-single-file
 # Using Yarn
-yarn astro add astro-single-file
+yarn astro add -D astro-single-file
 # Using PNPM
-pnpx astro add astro-single-file
+pnpx astro add -D astro-single-file
 ```
   
 __`astro.config.mjs`__
