@@ -15,6 +15,16 @@ This **[Astro integration][astro-integration]** allows developers to bundle the 
 Recently, I had to build some HTML emails templates to send to some users where the final bundle is preferable to be in a single file for backend developers. That's why, only CSS and no JS files are being merged in the HTML file. If you would like to support JS files, you are welcome to submit a PR! 
 
 ### Installation
+
+#### Automatic installation
+
+Run the following command to install and set it up for you automatically
+
+```sh
+astro add astro-single-file # Follow the instructions
+```
+
+#### Manual installation
   
 The `astro add` command-line tool automates the installation for you. Run one of the following commands in a new terminal window. (If you aren't sure which package manager you're using, run the first command.) Then, follow the prompts, and type "y" in the terminal (meaning "yes") for each one.
   
