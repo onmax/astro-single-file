@@ -1,6 +1,6 @@
 {
   "name": "astro-single-file",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Astro integration that allows developers to bundle the CSS and HTML in a single file",
   "main": "index.js",
   "repository": "https://github.com/onmax/astro-single-file/",
