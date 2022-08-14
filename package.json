@@ -22,9 +22,7 @@
     "@types/html-minifier-terser": "^6.1.0",
     "@types/node": "^18.7.3",
     "astro": "^1.0.5",
-    "html-minifier-terser": "^7.0.0-beta.0"
-  },
-  "dependencies": {
+    "html-minifier-terser": "^7.0.0-beta.0",
     "release-it": "^15.3.0"
   }
 }
