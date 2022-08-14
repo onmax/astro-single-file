@@ -12,7 +12,7 @@
         "removeComments": true,
         "allowJs": true,
         "module": "ES2020",
-        "outDir": "dist",
+        "outDir": ".",
         "target": "ES2020"
     }
 }
