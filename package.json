@@ -9,7 +9,8 @@
   "type": "module",
   "keywords": [
     "astro-integration",
-    "astro-build"
+    "astro-build",
+    "astro-component"
   ],
   "bugs": "https://github.com/onmax/astro-single-file/issues",
   "homepage": "https://github.com/onmax/astro-single-file",
