@@ -1,0 +1,29 @@
+{
+  "name": "astro-single-file",
+  "version": "1.0.0",
+  "description": "Astro integration that allows developers to bundle the CSS and HTML in a single file",
+  "main": "index.js",
+  "repository": "https://github.com/onmax/astro-single-file/",
+  "author": "maximo <maximo@nimiq.com>",
+  "license": "MIT",
+  "type": "module",
+  "keywords": [
+    "astro-integration",
+    "astro-build"
+  ],
+  "bugs": "https://github.com/onmax/astro-single-file/issues",
+  "homepage": "https://github.com/onmax/astro-single-file",
+  "scripts": {
+    "build": "tsc",
+    "release": "./node_modules/release-it/bin/release-it.js"
+  },
+  "devDependencies": {
+    "@types/html-minifier-terser": "^6.1.0",
+    "@types/node": "^18.7.3",
+    "astro": "^1.0.5",
+    "html-minifier-terser": "^7.0.0-beta.0"
+  },
+  "dependencies": {
+    "release-it": "^15.3.0"
+  }
+}

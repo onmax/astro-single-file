@@ -1,0 +1,18 @@
+{
+    "files": [
+        "src/index.ts"
+    ],
+    "compilerOptions": {
+        "declaration": true,
+        "strict": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "removeComments": true,
+        "allowJs": true,
+        "module": "ES2020",
+        "outDir": "dist",
+        "target": "ES2020"
+    }
+}
