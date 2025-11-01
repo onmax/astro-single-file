@@ -37,19 +37,31 @@ export class MockFileSystemAdapter implements FileSystemAdapter {
 
   readDir(path: string): string[] {
     const normalized = path.endsWith('/') ? path : path + '/'
-    const files: string[] = []
+    const items: string[] = []
 
+    // Add files
     for (const filePath of this.files.keys()) {
       if (filePath.startsWith(normalized)) {
         const relative = filePath.slice(normalized.length)
         const fileName = relative.split('/')[0]
-        if (fileName && !files.includes(fileName)) {
-          files.push(fileName)
+        if (fileName && !items.includes(fileName)) {
+          items.push(fileName)
         }
       }
     }
 
-    return files
+    // Add directories
+    for (const dirPath of this.dirs) {
+      if (dirPath.startsWith(normalized)) {
+        const relative = dirPath.slice(normalized.length)
+        const dirName = relative.split('/')[0]
+        if (dirName && !items.includes(dirName)) {
+          items.push(dirName)
+        }
+      }
+    }
+
+    return items
   }
 
   readFile(path: string, _encoding: BufferEncoding = 'utf8'): string {
