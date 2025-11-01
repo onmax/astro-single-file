@@ -5,7 +5,7 @@ export interface SingleFileConfig {
   /** Enable HTML/CSS minification (default: true) */
   minify?: boolean
   /** Lightning CSS transform options (autoprefixer, etc) */
-  lightningcss?: TransformOptions
+  lightningcss?: TransformOptions<{}>
 }
 
 export interface FileSystemAdapter {

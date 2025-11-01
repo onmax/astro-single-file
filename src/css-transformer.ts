@@ -2,7 +2,7 @@ import { transform } from 'lightningcss'
 import type { TransformOptions } from 'lightningcss'
 
 export class CssTransformer {
-  constructor(private config?: TransformOptions) {}
+  constructor(private config?: TransformOptions<{}>) {}
 
   transform(css: string): string {
     try {
