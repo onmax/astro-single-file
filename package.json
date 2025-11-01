@@ -16,6 +16,10 @@
   "homepage": "https://github.com/onmax/astro-single-file",
   "scripts": {
     "build": "tsc",
+    "test": "vitest",
+    "test:unit": "vitest run test/unit",
+    "test:integration": "vitest run test/integration",
+    "test:ci": "vitest run",
     "release": "./node_modules/release-it/bin/release-it.js"
   },
   "devDependencies": {
@@ -23,7 +27,9 @@
     "@types/node": "^24.9.2",
     "astro": "^5.15.3",
     "html-minifier-terser": "^7.2.0",
+    "lightningcss": "^1.28.2",
     "release-it": "^19.0.5",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.8"
   }
 }
