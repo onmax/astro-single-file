@@ -1,2 +1,3 @@
 import type { AstroIntegration } from 'astro';
-export default function astroSingleFile(): AstroIntegration;
+import type { SingleFileConfig } from './types';
+export default function astroSingleFile(config?: SingleFileConfig): AstroIntegration;
