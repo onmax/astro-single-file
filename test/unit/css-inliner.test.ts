@@ -54,4 +54,38 @@ describe('CssInliner', () => {
 
     expect(result).toBe(html)
   })
+
+  it('should replace multiple link tags with same filename', () => {
+    const html = '<link rel="stylesheet" href="shared.css"><div></div><link rel="stylesheet" href="shared.css">'
+    const css = 'body { margin: 0; }'
+
+    const result = inliner.replaceCss(html, 'shared.css', css)
+
+    expect(result).not.toContain('<link')
+    expect(result).toMatch(/<style type="text\/css">/g)
+    const styleCount = (result.match(/<style type="text\/css">/g) || []).length
+    expect(styleCount).toBe(2)
+  })
+
+  it('should handle filename with dots', () => {
+    const html = '<link rel="stylesheet" href="app.min.css">'
+    const css = '.app { color: blue; }'
+
+    const result = inliner.replaceCss(html, 'app.min.css', css)
+
+    expect(result).toContain('.app { color: blue; }')
+    expect(result).not.toContain('<link')
+  })
+
+  it('should replace target CSS when not first link', () => {
+    const html = '<link rel="stylesheet" href="vendor.css"><link rel="stylesheet" href="target.css"><link rel="stylesheet" href="other.css">'
+    const css = '.target { display: block; }'
+
+    const result = inliner.replaceCss(html, 'target.css', css)
+
+    expect(result).toContain('href="vendor.css"')
+    expect(result).toContain('href="other.css"')
+    expect(result).not.toContain('target.css')
+    expect(result).toContain('.target { display: block; }')
+  })
 })
