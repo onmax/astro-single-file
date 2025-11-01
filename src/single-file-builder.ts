@@ -75,8 +75,7 @@ export class SingleFileBuilder {
       if (stats.isFile()) {
         acc.push(file)
       } else if (stats.isDirectory()) {
-        const subFiles = this.fs.readDir(file).map(sf => `${file}/${sf}`)
-        acc = acc.concat(subFiles)
+        acc = acc.concat(this.findAllFiles(file + '/'))
       }
 
       return acc

@@ -87,6 +87,20 @@ describe('SingleFileBuilder', () => {
     expect(html).toContain('.sub{margin:0')
   })
 
+  it('should handle deeply nested directories', async () => {
+    fs.createDir('/build')
+    fs.createDir('/build/a')
+    fs.createDir('/build/a/b')
+    fs.createDir('/build/a/b/c')
+    fs.writeFile('/build/a/b/c/deep.html', '<link rel="stylesheet" href="deep.css">')
+    fs.writeFile('/build/a/b/c/deep.css', '.deep { color: green; }')
+
+    await builder.build('/build/', {})
+
+    const html = fs.readFile('/build/a/b/c/deep.html', 'utf8')
+    expect(html).toContain('.deep{color:green')
+  })
+
   it('should remove empty directories', async () => {
     fs.createDir('/build')
     fs.createDir('/build/empty')
