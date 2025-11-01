@@ -57,7 +57,62 @@ This integration will after the build process finishes, using `astro:build:done`
 
 ## Configuration
 
-At the moment, this integration does not have any configuration available. You're welcome to submit an issue or PR! 
+### Basic Usage
+
+```js
+import astroSingleFile from 'astro-single-file';
+
+export default {
+  integrations: [astroSingleFile()]
+}
+```
+
+### Configuration Options
+
+```typescript
+interface SingleFileConfig {
+  /** Enable HTML/CSS minification (default: true) */
+  minify?: boolean
+
+  /** Lightning CSS transform options */
+  lightningcss?: {
+    /** Target browsers for autoprefixing */
+    targets?: { [key: string]: number }
+    /** Enable CSS drafts (nesting, etc) */
+    drafts?: { nesting?: boolean }
+    /** Additional Lightning CSS options */
+    [key: string]: any
+  }
+}
+```
+
+### Examples
+
+**Disable minification:**
+```js
+astroSingleFile({ minify: false })
+```
+
+**Configure browser targets:**
+```js
+astroSingleFile({
+  lightningcss: {
+    targets: {
+      safari: 13 << 16,  // Safari 13+
+      chrome: 95 << 16   // Chrome 95+
+    }
+  }
+})
+```
+
+**Enable CSS nesting:**
+```js
+astroSingleFile({
+  lightningcss: {
+    drafts: { nesting: true }
+  }
+})
+``` 
 
 ## Troubleshooting
 
