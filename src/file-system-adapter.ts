@@ -65,6 +65,9 @@ export class MockFileSystemAdapter implements FileSystemAdapter {
   }
 
   deleteFile(path: string): void {
+    if (!this.files.has(path)) {
+      throw new Error(`ENOENT: no such file or directory, unlink '${path}'`)
+    }
     this.files.delete(path)
   }
 
