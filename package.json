@@ -1,34 +1,50 @@
 {
   "name": "astro-single-file",
+  "type": "module",
   "version": "1.1.0",
   "description": "Astro integration that allows developers to bundle the CSS and HTML in a single file",
-  "main": "index.js",
-  "repository": "https://github.com/onmax/astro-single-file/",
   "author": "maximo <maximo@nimiq.com>",
   "license": "MIT",
-  "type": "module",
+  "homepage": "https://github.com/onmax/astro-single-file",
+  "repository": "https://github.com/onmax/astro-single-file/",
+  "bugs": "https://github.com/onmax/astro-single-file/issues",
   "keywords": [
     "astro-integration",
     "astro-build",
     "astro-component"
   ],
-  "bugs": "https://github.com/onmax/astro-single-file/issues",
-  "homepage": "https://github.com/onmax/astro-single-file",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
-    "build": "tsc",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "vitest",
     "test:unit": "vitest run test/unit",
     "test:integration": "vitest run test/integration",
     "test:ci": "vitest run",
-    "release": "./node_modules/release-it/bin/release-it.js"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm build",
+    "release": "release-it"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^6.2.0",
     "@types/html-minifier-terser": "^7.0.2",
     "@types/node": "^24.9.2",
     "astro": "^5.15.3",
+    "eslint": "^9.18.0",
     "html-minifier-terser": "^7.2.0",
     "lightningcss": "^1.28.2",
     "release-it": "^19.0.5",
+    "tsdown": "^0.15.12",
     "typescript": "^5.9.3",
     "vitest": "^2.1.8"
   }

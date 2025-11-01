@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { CssInliner } from '../../src/css-inliner'
 
-describe('CssInliner', () => {
+describe('cssInliner', () => {
   const inliner = new CssInliner()
 
   it('should replace single CSS link with inline style', () => {

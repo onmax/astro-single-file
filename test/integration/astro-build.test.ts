@@ -1,11 +1,11 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { SingleFileBuilder } from '../../src/single-file-builder'
+import * as fs from 'node:fs'
+import * as os from 'node:os'
+import * as path from 'node:path'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { NodeFileSystemAdapter } from '../../src/file-system-adapter'
-import * as fs from 'fs'
-import * as path from 'path'
-import * as os from 'os'
+import { SingleFileBuilder } from '../../src/single-file-builder'
 
-describe('Astro Build Integration', () => {
+describe('astro Build Integration', () => {
   let tmpDir: string
   let adapter: NodeFileSystemAdapter
   let builder: SingleFileBuilder
@@ -28,11 +28,11 @@ describe('Astro Build Integration', () => {
 
     fs.copyFileSync(
       path.join(__dirname, '../fixtures/sample.html'),
-      htmlPath
+      htmlPath,
     )
     fs.copyFileSync(
       path.join(__dirname, '../fixtures/styles.css'),
-      cssPath
+      cssPath,
     )
 
     await builder.build(tmpDir, { minify: true })
@@ -120,7 +120,7 @@ describe('Astro Build Integration', () => {
     fs.writeFileSync(cssPath, '.box { color: rgb(255 0 0); }')
 
     await builder.build(tmpDir, {
-      lightningcss: { minify: true }
+      lightningcss: { minify: true },
     })
 
     const result = fs.readFileSync(htmlPath, 'utf8')

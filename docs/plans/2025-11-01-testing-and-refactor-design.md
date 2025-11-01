@@ -17,12 +17,12 @@ Add comprehensive testing (unit + integration) and refactor the integration to b
 **FileSystemAdapter Interface**
 ```typescript
 interface FileSystemAdapter {
-  readDir(path: string): string[]
-  readFile(path: string): string
-  writeFile(path: string, content: string): void
-  deleteFile(path: string): void
-  stat(path: string): { isFile(): boolean; isDirectory(): boolean }
-  removeDir(path: string): void
+  readDir: (path: string) => string[]
+  readFile: (path: string) => string
+  writeFile: (path: string, content: string) => void
+  deleteFile: (path: string) => void
+  stat: (path: string) => { isFile: () => boolean, isDirectory: () => boolean }
+  removeDir: (path: string) => void
 }
 ```
 
@@ -76,7 +76,7 @@ test/
 **Interface:**
 ```typescript
 interface SingleFileConfig {
-  minify?: boolean  // Default: true
+  minify?: boolean // Default: true
   lightningcss?: import('lightningcss').TransformOptions
 }
 ```

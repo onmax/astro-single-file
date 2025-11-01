@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { CssTransformer } from '../../src/css-transformer'
 
-describe('CssTransformer', () => {
+describe('cssTransformer', () => {
   it('should minify CSS by default', () => {
     const transformer = new CssTransformer()
     const css = `
@@ -19,7 +19,7 @@ describe('CssTransformer', () => {
 
   it('should apply Lightning CSS transformations with config', () => {
     const transformer = new CssTransformer({
-      minify: true
+      minify: true,
     })
     const css = 'body { color: red; }'
 

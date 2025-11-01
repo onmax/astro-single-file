@@ -1,5 +1,5 @@
-import * as fs from 'fs'
 import type { FileSystemAdapter } from './types'
+import * as fs from 'node:fs'
 
 export class NodeFileSystemAdapter implements FileSystemAdapter {
   readDir(path: string): string[] {
@@ -18,7 +18,7 @@ export class NodeFileSystemAdapter implements FileSystemAdapter {
     fs.unlinkSync(path)
   }
 
-  stat(path: string): { isFile(): boolean; isDirectory(): boolean } {
+  stat(path: string): { isFile: () => boolean, isDirectory: () => boolean } {
     return fs.statSync(path)
   }
 
@@ -36,7 +36,7 @@ export class MockFileSystemAdapter implements FileSystemAdapter {
   }
 
   readDir(path: string): string[] {
-    const normalized = path.endsWith('/') ? path : path + '/'
+    const normalized = path.endsWith('/') ? path : `${path}/`
     const items: string[] = []
 
     // Add files
@@ -83,7 +83,7 @@ export class MockFileSystemAdapter implements FileSystemAdapter {
     this.files.delete(path)
   }
 
-  stat(path: string): { isFile(): boolean; isDirectory(): boolean } {
+  stat(path: string): { isFile: () => boolean, isDirectory: () => boolean } {
     const isFile = this.files.has(path)
     const isDirectory = this.dirs.has(path)
 
@@ -93,7 +93,7 @@ export class MockFileSystemAdapter implements FileSystemAdapter {
 
     return {
       isFile: () => isFile,
-      isDirectory: () => isDirectory
+      isDirectory: () => isDirectory,
     }
   }
 

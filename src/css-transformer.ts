@@ -1,8 +1,9 @@
-import { transform } from 'lightningcss'
 import type { TransformOptions } from 'lightningcss'
+import { Buffer } from 'node:buffer'
+import { transform } from 'lightningcss'
 
 export class CssTransformer {
-  constructor(private config?: TransformOptions<{}>) {}
+  constructor(private config?: TransformOptions<Record<string, never>>) {}
 
   transform(css: string): string {
     try {
@@ -10,10 +11,11 @@ export class CssTransformer {
         filename: 'input.css',
         code: Buffer.from(css),
         minify: true,
-        ...this.config
+        ...this.config,
       })
       return result.code.toString()
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Lightning CSS transformation failed:', error)
       return css
     }

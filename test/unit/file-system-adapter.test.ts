@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest'
-import { NodeFileSystemAdapter, MockFileSystemAdapter } from '../../src/file-system-adapter'
-import * as fs from 'fs'
-import * as path from 'path'
-import * as os from 'os'
+import * as fs from 'node:fs'
+import * as os from 'node:os'
+import * as path from 'node:path'
+import { describe, expect, it } from 'vitest'
+import { MockFileSystemAdapter, NodeFileSystemAdapter } from '../../src/file-system-adapter'
 
-describe('NodeFileSystemAdapter', () => {
+describe('nodeFileSystemAdapter', () => {
   it('should read directory contents', () => {
     const adapter = new NodeFileSystemAdapter()
     const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'test-'))
@@ -74,7 +74,7 @@ describe('NodeFileSystemAdapter', () => {
   })
 })
 
-describe('MockFileSystemAdapter', () => {
+describe('mockFileSystemAdapter', () => {
   it('should store and retrieve files in memory', () => {
     const adapter = new MockFileSystemAdapter()
 

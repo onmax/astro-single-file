@@ -1,8 +1,8 @@
-import { describe, it, expect, beforeEach } from 'vitest'
-import { SingleFileBuilder } from '../../src/single-file-builder'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { MockFileSystemAdapter } from '../../src/file-system-adapter'
+import { SingleFileBuilder } from '../../src/single-file-builder'
 
-describe('SingleFileBuilder', () => {
+describe('singleFileBuilder', () => {
   let fs: MockFileSystemAdapter
   let builder: SingleFileBuilder
 
@@ -117,7 +117,7 @@ describe('SingleFileBuilder', () => {
     fs.writeFile('/build/style.css', 'body { color: rgb(255 0 0); }')
 
     await builder.build('/build/', {
-      lightningcss: { minify: true }
+      lightningcss: { minify: true },
     })
 
     const html = fs.readFile('/build/index.html', 'utf8')

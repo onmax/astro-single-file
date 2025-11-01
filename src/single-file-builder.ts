@@ -1,7 +1,7 @@
+import type { FileInfo, FileSystemAdapter, SingleFileConfig } from './types'
 import { minify } from 'html-minifier-terser'
 import { CssInliner } from './css-inliner'
 import { CssTransformer } from './css-transformer'
-import type { FileSystemAdapter, SingleFileConfig, FileInfo } from './types'
 
 export class SingleFileBuilder {
   private cssInliner = new CssInliner()
@@ -9,7 +9,7 @@ export class SingleFileBuilder {
   constructor(private fs: FileSystemAdapter) {}
 
   async build(buildDir: string, config: SingleFileConfig): Promise<void> {
-    const folder = buildDir.endsWith('/') ? buildDir : buildDir + '/'
+    const folder = buildDir.endsWith('/') ? buildDir : `${buildDir}/`
 
     // Find all files recursively
     const files = this.findAllFiles(folder)
@@ -22,7 +22,7 @@ export class SingleFileBuilder {
     const cssTransformer = new CssTransformer(config.lightningcss)
     const transformedCss = cssAssets.map(css => ({
       ...css,
-      contents: cssTransformer.transform(css.contents)
+      contents: cssTransformer.transform(css.contents),
     }))
 
     // Inline CSS into HTML files
@@ -54,14 +54,15 @@ export class SingleFileBuilder {
     }
 
     // Delete empty folders
-    this.fs.readDir(folder).forEach(f => {
+    this.fs.readDir(folder).forEach((f) => {
       const file = `${folder}${f}`
       try {
         const stats = this.fs.stat(file)
         if (stats.isDirectory() && this.fs.readDir(file).length === 0) {
           this.fs.removeDir(file)
         }
-      } catch {
+      }
+      catch {
         // Ignore errors (file might have been deleted)
       }
     })
@@ -74,8 +75,9 @@ export class SingleFileBuilder {
 
       if (stats.isFile()) {
         acc.push(file)
-      } else if (stats.isDirectory()) {
-        acc = acc.concat(this.findAllFiles(file + '/'))
+      }
+      else if (stats.isDirectory()) {
+        acc = acc.concat(this.findAllFiles(`${file}/`))
       }
 
       return acc
@@ -88,7 +90,7 @@ export class SingleFileBuilder {
       .map(path => ({
         contents: this.fs.readFile(path, 'utf8'),
         path,
-        fileName: path.split('/').pop()!
+        fileName: path.split('/').pop()!,
       }))
   }
 }

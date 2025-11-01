@@ -12,7 +12,7 @@ This **[Astro integration][astro-integration]** allows developers to bundle the 
 
 ## Why?
 
-Recently, I had to build some HTML emails templates to send to some users where the final bundle is preferable to be in a single file for backend developers. That's why, only CSS and no JS files are being merged in the HTML file. If you would like to support JS files, you are welcome to submit a PR! 
+Recently, I had to build some HTML emails templates to send to some users where the final bundle is preferable to be in a single file for backend developers. That's why, only CSS and no JS files are being merged in the HTML file. If you would like to support JS files, you are welcome to submit a PR!
 
 ### Installation
 
@@ -25,9 +25,9 @@ astro add astro-single-file # Follow the instructions
 ```
 
 #### Manual installation
-  
+
 The `astro add` command-line tool automates the installation for you. Run one of the following commands in a new terminal window. (If you aren't sure which package manager you're using, run the first command.) Then, follow the prompts, and type "y" in the terminal (meaning "yes") for each one.
-  
+
 ```sh
 # Using NPM
 npx astro add -D astro-single-file
@@ -36,20 +36,19 @@ yarn astro add -D astro-single-file
 # Using PNPM
 pnpx astro add -D astro-single-file
 ```
-  
+
 __`astro.config.mjs`__
 
 ```js
-import astroSingleFile from 'astro-single-file';
+import astroSingleFile from 'astro-single-file'
 
 export default {
   // ...
   integrations: [astroSingleFile()],
 }
 ```
-  
-Then, restart the dev server.
 
+Then, restart the dev server.
 
 ## Usage
 
@@ -60,7 +59,7 @@ This integration will after the build process finishes, using `astro:build:done`
 ### Basic Usage
 
 ```js
-import astroSingleFile from 'astro-single-file';
+import astroSingleFile from 'astro-single-file'
 
 export default {
   integrations: [astroSingleFile()]
@@ -98,8 +97,8 @@ astroSingleFile({ minify: false })
 astroSingleFile({
   lightningcss: {
     targets: {
-      safari: 13 << 16,  // Safari 13+
-      chrome: 95 << 16   // Chrome 95+
+      safari: 13 << 16, // Safari 13+
+      chrome: 95 << 16 // Chrome 95+
     }
   }
 })
@@ -112,7 +111,7 @@ astroSingleFile({
     drafts: { nesting: true }
   }
 })
-``` 
+```
 
 ## Troubleshooting
 
