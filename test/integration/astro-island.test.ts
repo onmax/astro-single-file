@@ -1,13 +1,11 @@
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import type { TransformOptions } from 'lightningcss'
-import { Buffer } from 'node:buffer'
 import * as fs from 'node:fs'
-import * as path from 'node:path'
 import * as os from 'node:os'
+import * as path from 'node:path'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { NodeFileSystemAdapter } from '../../src/file-system-adapter'
 import { SingleFileBuilder } from '../../src/single-file-builder'
 
-describe('Astro Island Support', () => {
+describe('astro Island Support', () => {
   let tmpDir: string
   let adapter: NodeFileSystemAdapter
   let builder: SingleFileBuilder
@@ -121,9 +119,8 @@ describe('Astro Island Support', () => {
 
     await builder.build(tmpDir, {})
 
-    const result = fs.readFileSync(htmlPath, 'utf8')
-
     // Future: could inline JS as base64
+    // const result = fs.readFileSync(htmlPath, 'utf8')
     // expect(result).toContain('data:text/javascript;base64,')
 
     // For now, just verify JS file is preserved

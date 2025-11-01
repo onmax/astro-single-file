@@ -1,4 +1,5 @@
 import type { FileInfo, FileSystemAdapter, SingleFileConfig } from './types'
+import * as path from 'node:path'
 import { minify } from 'html-minifier-terser'
 import { CssInliner } from './css-inliner'
 import { CssTransformer } from './css-transformer'
@@ -9,7 +10,7 @@ export class SingleFileBuilder {
   constructor(private fs: FileSystemAdapter) {}
 
   async build(buildDir: string, config: SingleFileConfig): Promise<void> {
-    const folder = buildDir.endsWith('/') ? buildDir : `${buildDir}/`
+    const folder = buildDir
 
     // Find all files recursively
     const files = this.findAllFiles(folder)
@@ -55,7 +56,7 @@ export class SingleFileBuilder {
 
     // Delete empty folders
     this.fs.readDir(folder).forEach((f) => {
-      const file = `${folder}${f}`
+      const file = path.join(folder, f)
       try {
         const stats = this.fs.stat(file)
         if (stats.isDirectory() && this.fs.readDir(file).length === 0) {
@@ -70,14 +71,14 @@ export class SingleFileBuilder {
 
   private findAllFiles(folder: string): string[] {
     return this.fs.readDir(folder).reduce<string[]>((acc, f) => {
-      const file = `${folder}${f}`
+      const file = path.join(folder, f)
       const stats = this.fs.stat(file)
 
       if (stats.isFile()) {
         acc.push(file)
       }
       else if (stats.isDirectory()) {
-        acc = acc.concat(this.findAllFiles(`${file}/`))
+        acc = acc.concat(this.findAllFiles(file))
       }
 
       return acc
@@ -87,10 +88,10 @@ export class SingleFileBuilder {
   private openFiles(files: string[], fileType: 'html' | 'css'): FileInfo[] {
     return files
       .filter(i => i.endsWith(`.${fileType}`))
-      .map(path => ({
-        contents: this.fs.readFile(path, 'utf8'),
-        path,
-        fileName: path.split('/').pop()!,
+      .map(filePath => ({
+        contents: this.fs.readFile(filePath, 'utf8'),
+        path: filePath,
+        fileName: path.basename(filePath),
       }))
   }
 }

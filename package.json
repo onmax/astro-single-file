@@ -35,14 +35,16 @@
     "prepublishOnly": "pnpm build",
     "release": "release-it"
   },
+  "dependencies": {
+    "html-minifier-terser": "^7.2.0",
+    "lightningcss": "^1.30.2"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^6.2.0",
     "@types/html-minifier-terser": "^7.0.2",
     "@types/node": "^24.9.2",
     "astro": "^5.15.3",
     "eslint": "^9.18.0",
-    "html-minifier-terser": "^7.2.0",
-    "lightningcss": "^1.28.2",
     "release-it": "^19.0.5",
     "tsdown": "^0.15.12",
     "typescript": "^5.9.3",
