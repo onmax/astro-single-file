@@ -1,5 +1,9 @@
 # astro-single-file
 
+[![npm version](https://comark-ui.onmax.me/badge.svg?source=npm-version&package=astro-single-file&icon=npm)](https://www.npmjs.com/package/astro-single-file)
+[![npm downloads](https://comark-ui.onmax.me/badge.svg?source=npm-downloads&package=astro-single-file&period=month&icon=npm)](https://www.npmjs.com/package/astro-single-file)
+[![docs](https://comark-ui.onmax.me/badge.svg?label=docs&value=astro-single-file)](https://github.com/onmax/astro-single-file#readme)
+
 This **[Astro integration][astro-integration]** allows developers to bundle the CSS and HTML in a single file.
 
 - <strong>[Why](#why)</strong>
