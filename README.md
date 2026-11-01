@@ -4,8 +4,67 @@
 [![npm downloads](https://comark-ui.onmax.me/badge.svg?source=npm-downloads&package=astro-single-file&period=month&icon=npm)](https://www.npmjs.com/package/astro-single-file)
 [![docs](https://comark-ui.onmax.me/badge.svg?label=docs&value=astro-single-file)](https://github.com/onmax/astro-single-file#readme)
 
+> [!WARNING]
+> **This package is deprecated.** Astro inlines CSS on its own since 2.6.0, so you no longer need this integration. It won't get new features or fixes.
+
+## Migrating to Astro's built-in option
+
+Uninstall the integration and set [`build.inlineStylesheets`](https://docs.astro.build/en/reference/configuration-reference/#buildinlinestylesheets) to `"always"`:
+
+```sh
+npm uninstall astro-single-file
+```
+
+```js
+// astro.config.mjs
+import { defineConfig } from 'astro/config'
+
+export default defineConfig({
+  build: { inlineStylesheets: 'always' },
+})
+```
+
+Astro then puts every bundled stylesheet in a `<style>` tag, nested pages included, and writes no `.css` files to `dist`. It minifies the HTML (`compressHTML`) and the CSS by default.
+
+If you used the `lightningcss` option for browser targets, pass the same targets to Vite:
+
+```js
+export default defineConfig({
+  build: { inlineStylesheets: 'always' },
+  vite: {
+    css: { transformer: 'lightningcss', lightningcss: { targets: { safari: 13 << 16 } } },
+    build: { cssMinify: 'lightningcss' },
+  },
+})
+```
+
+Astro does not inline stylesheets you link from `public/` (`<link href="/styles.css">`). Import them in your page or layout instead, for example `import '../styles/global.css'`.
+
+### Inlining JavaScript too
+
+This integration never inlined JavaScript. Astro already inlines small scripts. To inline larger ones as well, add [`vite-plugin-singlefile`](https://github.com/richardtallent/vite-plugin-singlefile):
+
+```js
+import { defineConfig } from 'astro/config'
+import { viteSingleFile } from 'vite-plugin-singlefile'
+
+export default defineConfig({
+  build: { inlineStylesheets: 'always' },
+  vite: { plugins: [viteSingleFile()] },
+})
+```
+
+### HTML emails
+
+Neither option copies CSS into `style` attributes, which many email clients require. Run the built HTML through a CSS inliner such as [`juice`](https://github.com/Automattic/juice) for that.
+
+## Previous documentation
+
+The documentation below is for the last release, `1.1.0`.
+
 This **[Astro integration][astro-integration]** allows developers to bundle the CSS and HTML in a single file.
 
+- <strong>[Migrating to Astro's built-in option](#migrating-to-astros-built-in-option)</strong>
 - <strong>[Why](#why)</strong>
 - <strong>[Installation](#installation)</strong>
 - <strong>[Usage](#usage)</strong>
