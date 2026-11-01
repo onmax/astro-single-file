@@ -62,19 +62,19 @@ describe('cssInliner', () => {
     const result = inliner.replaceCss(html, 'shared.css', css)
 
     expect(result).not.toContain('<link')
-    expect(result).toMatch(/<style type="text\/css">/g)
     const styleCount = (result.match(/<style type="text\/css">/g) || []).length
     expect(styleCount).toBe(2)
   })
 
-  it('should handle filename with dots', () => {
-    const html = '<link rel="stylesheet" href="app.min.css">'
+  it('should match filename dots literally', () => {
+    const html = '<link rel="stylesheet" href="appXminYcss"><link rel="stylesheet" href="app.min.css">'
     const css = '.app { color: blue; }'
 
     const result = inliner.replaceCss(html, 'app.min.css', css)
 
     expect(result).toContain('.app { color: blue; }')
-    expect(result).not.toContain('<link')
+    expect(result).toContain('<link rel="stylesheet" href="appXminYcss">')
+    expect(result).not.toContain('href="app.min.css"')
   })
 
   it('should replace target CSS when not first link', () => {
